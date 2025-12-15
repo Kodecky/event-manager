@@ -1,3 +1,6 @@
+/*!******************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./assets/css/style.css ***!
+  \******************************************************************************************************************/
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -499,9 +502,45 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
+.container {
+  width: 100%;
+}
+@media (min-width: 640px) {
+
+  .container {
+    max-width: 640px;
+  }
+}
+@media (min-width: 768px) {
+
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1280px) {
+
+  .container {
+    max-width: 1280px;
+  }
+}
+@media (min-width: 1536px) {
+
+  .container {
+    max-width: 1536px;
+  }
+}
 .my-4 {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.block {
+  display: block;
 }
 .pl-2 {
   padding-left: 0.5rem;
@@ -678,6 +717,79 @@ video {
     }
   }
 }
+
+.em-search {
+  max-width: 720px;
+  margin: 40px auto;
+  padding: 0 16px;
+
+
+  .em-search-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr auto;
+    gap: 12px;
+    align-items: end;
+  }
+
+  label {
+    display: grid;
+    gap: 6px;
+    font-weight: 600;
+  }
+
+  select,
+  input,
+  button {
+    padding: 10px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .em-results {
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+
+  .em-result-item {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 12px 14px;
+
+    a {
+      text-decoration: none;
+    }
+  }
+}
+
+
+.wp-site-blocks {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .wp-block-post-title {
+    margin-bottom: 2rem;
+  }
+
+  .wp-block-post-title {
+    text-align: center;
+  }
+
+  .wp-block-post-title {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+
+  .wp-block-post-title {
+    font-weight: 700;
+  }
+}
+
 
 .hover\:text-blue-700:hover {
   --tw-text-opacity: 1;

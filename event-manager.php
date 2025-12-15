@@ -4,6 +4,7 @@
  * Description: Wtyczka stworzona do zarządzania wydarzeniami.
  * Version: 1.0.0
  * Author: Damian Pawela
+ * Text Domain: event-manager
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,11 +29,15 @@ function em_init_plugin() {
     require_once EM_PLUGIN_DIR . 'includes/cpt-registration.php';
     require_once EM_PLUGIN_DIR . 'includes/acf-fields.php';
     require_once EM_PLUGIN_DIR . 'includes/ajax-handlers.php';
+    require_once EM_PLUGIN_DIR . 'includes/shortcodes.php';
 
     add_action( 'wp_enqueue_scripts', 'em_enqueue_assets' );
     add_filter( 'single_template', 'em_single_event_template' );
 }
 
+/**
+ * Wyświetlenie komunikatu o braku ACF.
+ */
 function em_acf_missing_notice() {
     echo '<div class="notice notice-error"><p><strong>' .
         esc_html__( 'Event Manager', 'event-manager' ) .
@@ -44,34 +49,38 @@ function em_acf_missing_notice() {
 /**
  * Aktualizacja reguł rewrite podczas aktywacji wtyczki.
  */
-register_activation_hook( __FILE__, 'em_activate_plugin' );
-function em_activate_plugin() {
-    // Rejestracja CPT i taxonomii.
-    if ( function_exists( 'em_register_event_cpt' ) ) {
-        em_register_event_cpt();
-    }
-    if ( function_exists( 'em_register_city_taxonomy' ) ) {
-        em_register_city_taxonomy();
-    }
 
-    flush_rewrite_rules();
+// Aktywacja wtyczki
+register_activation_hook( __FILE__, 'em_activate_plugin' );
+
+function em_activate_plugin() {
+
+  require_once EM_PLUGIN_DIR . 'includes/cpt-registration.php';
+
+  // Rejestracja CPT i taxonomii.
+  em_register_event_cpt();
+  em_register_city_taxonomy();
+  // Aktualizacja reguł rewrite.
+  flush_rewrite_rules();
 }
 
+// Dezaktywacja wtyczki
 register_deactivation_hook( __FILE__, 'em_deactivate_plugin' );
+
 function em_deactivate_plugin() {
     flush_rewrite_rules();
 }
 
 
 //  Rejestracja assetów CSS/JS
-add_action( 'wp_enqueue_scripts', 'em_enqueue_assets' );
-
 function em_enqueue_assets() {
   $css_rel = 'assets/build/css/style.css';
   $js_rel  = 'assets/build/js/event-register.js';
+  $js_search_rel = 'assets/build/js/event-search.js';
 
   $css_path = EM_PLUGIN_DIR . $css_rel;
   $js_path  = EM_PLUGIN_DIR . $js_rel;
+  $js_search_path = EM_PLUGIN_DIR . $js_search_rel;
 
   wp_enqueue_style(
       'em-styles',
@@ -88,15 +97,23 @@ function em_enqueue_assets() {
       true
   );
 
+  wp_enqueue_script(
+    'em-search',
+    EM_PLUGIN_URL . $js_search_rel,
+    array(),
+    file_exists( $js_search_path ) ? filemtime( $js_search_path ) : '1.0.0',
+    true
+  );
+
+  // Przekazywanie danych do JavaScript.
   wp_localize_script( 'em-register', 'EM_AJAX', array(
       'ajax_url' => admin_url( 'admin-ajax.php' ),
       'nonce'    => wp_create_nonce( 'em_register_event' ),
   ) );
+
 }
 
 // Podpięcie single event template dla CPT event
-add_filter( 'single_template', 'em_single_event_template' );
-
 function em_single_event_template( $single ) {
 
     global $post;

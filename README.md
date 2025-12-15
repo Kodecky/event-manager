@@ -1,7 +1,8 @@
 # Event Manager
 
 Wtyczka do zarządzania wydarzeniami oraz rejestracji uczestników.
-Dane rejestracji są przechowywane w `post_meta` w polu `event_registrations` (tablica).
+- Dane rejestracji są przechowywane w `post_meta` w polu `event_registrations` (tablica).
+- Wtyczka zawiera również AJAX wyszukiwarkę eventów (po mieście i zakresie dat) dostępną jako shortcode.
 
 ## Instalacja
 
@@ -34,6 +35,26 @@ Po aktywacji wtyczki:
 - Nonce dla bezpieczeństwa
 - Obsługa limitu miejsc oraz duplikatów email
 - (Ważne) Rejestracja uczestników dostępna tylko dla zalogowanych użytkowników
+- Wyszukiwarka eventów (miasto + zakres dat) dostępna jako shortcode:
+  - shortcode: 
+  ``` text
+  [em_event_search]
+  ```
+
+### Wyszukiwarka (AJAX)
+- Renderuje formularz wyszukiwania eventów za pomocą shortcode
+- Filtry
+  - miasto (taksonomia `city`)
+  - zakres dat (pole ACF `event_start_datetime`)
+- Wyniki ładowane dynamicznie bez przeładowania strony (AJAX)
+
+#### Przykład użycia:
+1. Utwórz nową stronę (np. „Events search”)
+2. Dodaj blok Gutenberg **Paragraph**
+3. Wklej shortcode:
+```text 
+[em_event_search] 
+```
 
 ## AJAX Endpoints
 
@@ -69,7 +90,36 @@ Przykładowy error (JSON)
   }
 }
 ```
+### `POST /wp-admin/admin-ajax.php?action=em_search_events`
+
+Zwraca listę eventów w postaci HTML (renderowany po stronie PHP), na podstawie filtrów.
+
+#### Parametry (POST)
+- `action`: `em_search_events`
+- `nonce`: nonce (jak wyżej)
+- `city`: slug miasta (string, opcjonalnie)
+- `date_from`: `YYYY-MM-DD` (string, opcjonalnie)
+- `date_to`: `YYYY-MM-DD` (string, opcjonalnie)
+
+#### Przykładowy success (JSON)
+```json
+{
+  "success": true,
+  "data": {
+    "html": "<ul class=\"em-results\">...</ul>"
+  }
+}
+```
+Przykładowy error (JSON)
+```json
+{
+  "success": false,
+  "data": {
+    "message": "Security check failed."
+  }
+}
+```
 
 ## Znane ograniczenia / TODO 
-- Wyszukiwarka eventów po mieście / dacie - AJAX
 - Podgląd listy rejestracji w WP
+- Paginacja wyników wyszukiwarki

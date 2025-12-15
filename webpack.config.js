@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: {
     'event-register': './assets/js/event-register.js',
+    'event-search': './assets/js/event-search.js',
     'style': './assets/css/style.css',
   },
   output: {
