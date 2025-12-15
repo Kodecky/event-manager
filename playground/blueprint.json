@@ -1,0 +1,33 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/events-search/",
+  "steps": [
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "url",
+        "url": "https://downloads.wordpress.org/plugin/advanced-custom-fields.latest-stable.zip"
+      }
+    },
+    { "step": "activatePlugin", "pluginName": "advanced-custom-fields" },
+
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "url",
+        "url": "https://github.com/Kodecky/event-manager/releases/download/v1.0.0/event-manager.zip"
+      }
+    },
+    { 
+      "step": "activatePlugin",
+      "pluginName": "event-manager"
+    },
+    {
+      "step": "importWxr",
+      "file": {
+        "resource": "url",
+        "url": "https://raw.githubusercontent.com/Kodecky/event-manager/main/playground/content.wxr.xml"
+      }
+    }
+  ]
+}
