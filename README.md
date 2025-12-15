@@ -22,7 +22,7 @@ Po aktywacji wtyczki:
 - Ustaw pola ACF (na dole okna edycji eventu, w Meta Boxes):
   - Event start date & time (wymagane)
   - Event participant limit (wymagane)
-  - Additional details (opcjonalnie)
+  - Event description (opcjonalnie)
 - Przypisz miasto (taksonomia)
 
 ## Funkcjonalność
@@ -33,6 +33,7 @@ Po aktywacji wtyczki:
 - Walidacja i sanityzacja po stronie PHP
 - Nonce dla bezpieczeństwa
 - Obsługa limitu miejsc oraz duplikatów email
+- (Ważne) Rejestracja uczestników dostępna tylko dla zalogowanych użytkowników
 
 ## AJAX Endpoints
 
@@ -57,9 +58,10 @@ Rejestruje uczestnika na event. Dane trafiają do `post_meta` pod kluczem `event
     "limit": 10
   }
 }
+```
 
 Przykładowy error (JSON)
-
+```json
 {
   "success": false,
   "data": {
@@ -67,6 +69,7 @@ Przykładowy error (JSON)
   }
 }
 ```
+
 ## Znane ograniczenia / TODO 
 - Wyszukiwarka eventów po mieście / dacie - AJAX
 - Podgląd listy rejestracji w WP
