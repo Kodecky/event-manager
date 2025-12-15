@@ -1,13 +1,6 @@
 {
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
   "landingPage": "/events-search/",
-  "preferredVersions": {
-    "php": "8.3",
-    "wp": "latest"
-  },
-  "features": {
-    "networking": true
-  },
   "steps": [
     {
       "step": "installPlugin",
@@ -17,13 +10,12 @@
       },
       "options": { "activate": true }
     },
-
     {
       "step": "writeFile",
       "path": "/tmp/event-manager.zip",
       "data": {
         "resource": "url",
-        "url": "https://raw.githubusercontent.com/Kodecky/event-manager/v1.0.0/event-manager.zip"
+        "url": "https://raw.githubusercontent.com/Kodecky/event-manager/main/event-manager.zip"
       }
     },
     {
@@ -35,7 +27,6 @@
       "step": "activatePlugin",
       "pluginPath": "event-manager/event-manager.php"
     },
-
     {
       "step": "importWxr",
       "file": {
