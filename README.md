@@ -123,3 +123,19 @@ Przykładowy error (JSON)
 ## Znane ograniczenia / TODO 
 - Podgląd listy rejestracji w WP
 - Paginacja wyników wyszukiwarki
+
+## WordPress Playground (Test Environment)
+
+Projekt zawiera gotowe środowisko testowe oparte o WordPress Playground.
+
+Środowisko:
+- instaluje WordPress
+- instaluje i aktywuje ACF
+- instaluje i aktywuje wtyczkę Event Manager
+- importuje przykładowe dane (eventy, miasta, stronę wyszukiwania)
+
+### Uruchomienie
+
+Kliknij w link poniżej, aby uruchomić środowisko testowe w przeglądarce:
+
+https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/Kodecky/event-manager/main/playground/blueprint.json
