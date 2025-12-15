@@ -9,8 +9,10 @@
         "url": "https://downloads.wordpress.org/plugin/advanced-custom-fields.latest-stable.zip"
       }
     },
-    { "step": "activatePlugin", "pluginName": "advanced-custom-fields" },
-
+    {
+      "step": "activatePlugin",
+      "pluginName": "advanced-custom-fields"
+    },
     {
       "step": "installPlugin",
       "pluginZipFile": {
@@ -18,7 +20,7 @@
         "url": "https://github.com/Kodecky/event-manager/releases/download/v1.0.0/event-manager.zip"
       }
     },
-    { 
+    {
       "step": "activatePlugin",
       "pluginName": "event-manager"
     },
