@@ -136,6 +136,7 @@ Projekt zawiera gotowe środowisko testowe oparte o WordPress Playground.
 
 ### Uruchomienie
 
+Środowisko uruchamia się w całości w przeglądarce i nie wymaga lokalnej instalacji WordPressa.
 Kliknij w link poniżej, aby uruchomić środowisko testowe w przeglądarce:
 
 https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.com/Kodecky/event-manager/main/playground/blueprint.json
